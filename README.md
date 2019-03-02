@@ -1,2 +1,2 @@
 # Neural-Beats
-web application for generating music ( PSI prodject )
+Neural network based web application for generating music (PSI project)
