@@ -1,0 +1,33 @@
+a:link{
+	font-size:16;
+	color:yellow;
+}
+a:visited{
+	color:white;
+	font-size:16;
+}
+
+body{
+	font-family:Times;
+	background-color:#0077BE;
+	color:white;
+	font-size:16;
+}
+
+table{
+	background-color:#7f7f7f;
+}
+
+.greska{
+	font-size:20;
+	color:#FFBF00
+}
+
+.obavestenja{
+	font-size:20;
+	color:lime;
+}
+
+.komentari{
+	font-size:20;
+}
