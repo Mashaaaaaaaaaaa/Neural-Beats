@@ -1,0 +1,53 @@
+/*Đorđe Arsić*/
+a:link{
+	font-size:20;
+	color:yellow;
+}
+a:visited{
+	color:white;
+	font-size:20;
+}
+
+body{
+	font-family:Times;
+	background-color:#0077BE;
+	color:white;
+	font-size:20;
+}
+
+table{
+	background-color:#7f7f7f;
+	font-size:20;
+	font-family:Times;
+}
+
+.greska{
+	font-size:20;
+	color:#FFBF00
+}
+
+.obavestenja{
+	font-size:20;
+	color:lime;
+}
+
+.komentari{
+	font-size:20;
+}
+
+.flex-container-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color:#7f7f7f;
+  font-size:20;
+  font-family:Times;
+}
