@@ -50,6 +50,11 @@ let decoder = new Decoder("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeat
 generator.generate().then(function (value) {
     decoder.decode(value).then(function (value) {
         console.log(value);
+        generator.generate().then(function (value) {
+            decoder.decode(value).then(function (value) {
+                console.log(value);
+            });
+        });
     });
 });
 */
