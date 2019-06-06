@@ -11,7 +11,6 @@ module.exports = internal.MeasureAutoencoder = class {
     async decode(measure){
         if(null==decoder){
             decoder = await tfjs.loadLayersModel(_decoder_path);
-            console.log(decoder.summary());
         }
         measure=tfjs.tensor2d(measure,[1,512]);
         let decoded=await decoder.predict(measure);

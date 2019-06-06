@@ -9,7 +9,7 @@ let _LSTM_path = null;
 let _PCA_decoder_path = null;
 let LSTM_data = null;
 let parameters = Array(40).fill(0.5);
-let button_pressed = false;
+let used_parameters=Array(40).fill(0.5);
 
 module.exports = internal.MeasureGenerator = class {
     constructor(LSTM_path, PCA_decoder_path) {
@@ -17,9 +17,8 @@ module.exports = internal.MeasureGenerator = class {
         _PCA_decoder_path = PCA_decoder_path;
     }
 
-    alter_parameter(id, value) {
-        if (id == 40) buton_pressed = true;
-        else if (id > 40 || id < 0) {
+    set_parameter(id, value) {
+        if (id > 39 || id < 0) {
             throw "Out of bounds!";
         } else {
             parameters[id] = value;
@@ -29,12 +28,13 @@ module.exports = internal.MeasureGenerator = class {
     async generate() {
         if (null == LSTM) LSTM = await tfjs.loadLayersModel(_LSTM_path);
         if (null == PCA_decoder) PCA_decoder = await tfjs.loadLayersModel(_PCA_decoder_path);
-        if (button_pressed || null == LSTM_data) {
+        if (JSON.stringify(parameters)!=JSON.stringify(used_parameters) || null == LSTM_data) {
+            used_parameters=[...parameters];
             let decoded = PCA_decoder.predict(tfjs.tensor2d(parameters, [1, 40]));
             decoded = await decoded.data();
             decoded = Array.prototype.slice.call(decoded);
             LSTM_data = math.reshape(decoded, [1, 8, 512]);
-            button_pressed = false;
+            console.log("Updated parameters!");
         }
         let new_elem = await LSTM.predict(tfjs.tensor3d(LSTM_data)).data();
         new_elem = Array.prototype.slice.call(new_elem);
@@ -45,11 +45,11 @@ module.exports = internal.MeasureGenerator = class {
 }
 
 /*let generator = new internal.MeasureGenerator("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/LSTM/model.json", "file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/PCADecoder/model.json");
-button_pressed = true;
+let Decoder = require('./MeasureAutoencoder');
+let decoder = new Decoder("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/decoder/model.json")
 generator.generate().then(function (value) {
-    let Decoder = require('./MeasureAutoencoder');
-    let decoder = new Decoder("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/decoder/model.json")
     decoder.decode(value).then(function (value) {
         console.log(value);
     });
-});*/
+});
+*/
