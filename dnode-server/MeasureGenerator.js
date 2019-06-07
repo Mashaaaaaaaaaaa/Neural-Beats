@@ -15,12 +15,17 @@ let LSTM_data = null;
 let parameters = Array(40).fill(0.5);
 let used_parameters=Array(40).fill(0.5);
 
-module.exports = internal.MeasureGenerator = class {
+module.exports = internal.MeasureGenerator = class 
+	/*
+	konstruktor, cuva puteve na mozgove
+	*/
     constructor(LSTM_path, PCA_decoder_path) {
         _LSTM_path = LSTM_path;
         _PCA_decoder_path = PCA_decoder_path;
     }
-
+	/*
+	menja neki parametar po id tog parametra
+	*/
     set_parameter(id, value) {
         if (id > 39 || id < 0) {
             throw "Out of bounds!";
@@ -28,7 +33,9 @@ module.exports = internal.MeasureGenerator = class {
             parameters[id] = value;
         }
     }
-
+	/*
+	generise muziku
+	*/
     async generate() {
         if (null == LSTM) LSTM = await tfjs.loadLayersModel(_LSTM_path);
         if (null == PCA_decoder) PCA_decoder = await tfjs.loadLayersModel(_PCA_decoder_path);
