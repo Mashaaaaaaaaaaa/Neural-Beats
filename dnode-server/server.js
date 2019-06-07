@@ -5,10 +5,10 @@ const Generator=require("./MeasureGenerator");
 const Decoder=require("./MeasureAutoencoder");
 const generators={};
 let sid=0;
-const decoder=new Decoder("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/decoder/model.json");
+const decoder=new Decoder("https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/decoder/model.json");
 const server=dnode({
     open_session: function(callback){
-        generators[sid]=new Generator("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/LSTM/model.json", "file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/PCADecoder/model.json");
+        generators[sid]=new Generator("https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/LSTM/model.json", "https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/PCADecoder/model.json");
         callback(sid++);
     },
     set_parameter: function(id, value, session_id){
