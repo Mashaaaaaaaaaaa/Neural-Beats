@@ -1,0 +1,140 @@
+.header{
+	width:auto;
+	background-color: #0e192b;
+	padding: 10px;
+	padding-top: 5px;
+	color: white;
+	font-size: 15px;
+	margin: -7;
+	margin-right: -8;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: auto;
+  height: 50px;
+  color:gray;
+}
+
+body{
+	width: auto;
+	background-color: #343f51;
+}
+
+form {
+	float: right;
+	margin-right: 10px;
+	letter-spacing: 1px;
+}
+.header-tekst{
+	padding: 5px;
+	font-size: 15px;
+	border: none;
+	margin: 1px;
+}
+input[type=submit].signin{
+	background: orange;
+	color:white;
+	padding:5px 10px;
+	padding-top: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	border-radius: 12px;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+input[type=submit].search{
+	background: #939292;
+	color:black;
+	padding:5px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+img.header{
+  	max-width: 300;
+}
+img.home{
+	max-width: 400;
+}
+
+div.signin{
+    width: 300px;
+    margin: auto;
+  	padding-top: 100px;
+}
+span.signin{
+  	font-size: 30px;
+  	color: white;
+  	line-height: 1.2;
+  	text-align: center;
+
+  	display: block;
+}
+
+.tekst-gray{
+  	font-size: 16px;
+  	color: #999999;
+  	line-height: 1.4;
+  	text-align: center;
+}
+
+.tekst-link{
+  	font-size: 16px;
+  	color: #333333;
+  	line-height: 1.2;
+  	text-transform: uppercase;
+  	text-align: center;
+}
+
+.input-wrap{
+	width: 100%;
+  	background-color: #fff;
+  	border-radius: 31px;
+ 	position: relative;
+ 	z-index: 1;
+
+ 	font-size: 16px;
+  	color: #43383e;
+  	line-height: 1.2;
+
+  	display: block;
+  	height: 62px;
+  	background: #fff;
+  	padding: 0 35px 0 35px;
+}
+.button-wrap{
+  	width: 200px;
+  	margin-left: 30px;
+	justify-content: center;
+	padding: 20px;
+	border-radius: 36px;
+	cursor: pointer;
+	background: #939292;	
+}
+
+div.centriraj{
+    max-width: 500px;
+    margin: auto;
+  	padding-top: 100px;
+}
+span.font{
+  	font-size: 30px;
+  	color: white;
+  	line-height: 1.2;
+  	text-align: center;
+ }
+
+ a.yellow{
+ 	color:yellow;
+ }
+
+ .flex-container-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  padding-top: 20;
+}
