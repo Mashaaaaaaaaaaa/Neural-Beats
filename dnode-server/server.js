@@ -1,4 +1,7 @@
 //jm150231d
+/*
+DNode server 0.3 - koristi se kao omotac funkcionalnosti neuralnih mreza za pozive iz php
+*/
 'use strict'
 
 const dnode=require("./node_modules/dnode");

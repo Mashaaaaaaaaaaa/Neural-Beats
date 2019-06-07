@@ -1,4 +1,7 @@
 //jm150231d
+/*
+MeasureGenerator 1.0 - ova klasa ucitava LSTM-generator muzike i generise muziku
+*/
 'use strict'
 
 const internal = {};
