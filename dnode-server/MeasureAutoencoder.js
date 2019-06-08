@@ -1,3 +1,7 @@
+//jm150231d
+/*
+MeasureAutoencoder 1.0 - ova klasa ucitava dekoder i koristi ga da prevodi podatke iz generatora u nesto sto lici na MIDI i moze da se igra u brauzeru
+*/
 'use strict'
 
 const internal = {};
@@ -7,7 +11,13 @@ let _decoder_path=null;
 const math=require("./node_modules/mathjs");
 
 module.exports = internal.MeasureAutoencoder = class {
+	/*
+	konstruktor, cuva put do mozga
+	*/
     constructor(decoder_path) {_decoder_path=decoder_path;}
+	/*
+	prevodi muziku iz unutrasnjeg formata LSTM'a u citljiv format
+	*/
     async decode(measure){
         if(null==decoder){
             decoder = await tfjs.loadLayersModel(_decoder_path);
