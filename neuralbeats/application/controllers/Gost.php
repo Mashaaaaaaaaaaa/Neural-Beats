@@ -40,7 +40,7 @@ class Gost extends CI_Controller {
     }
 
     public function ulogujse() {
-      /*  $this->form_validation->
+      $this->form_validation->
                 set_rules('korime', "Korisnicko ime", "required");
         $this->form_validation->
                 set_rules('lozinka', "Lozinka", "required");
@@ -60,7 +60,7 @@ class Gost extends CI_Controller {
             else {
                 $this->login('Neispravan username');
             }
-        }*/
+        }
      redirect('korisnik');
     }
     public function registrujse(){
