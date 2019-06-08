@@ -53,7 +53,7 @@ function change_volume(value){
 function change_speed(value){
 	speed=parseFloat(value)/10;
 }
-function play_music(){
+function play_music(measure){
 	for(var i=0;i<measure.length;i++){
 		var delay=measure[i][0]/speed;
 		if (i>0) delay-=measureExample[i-1][0]/speed;
