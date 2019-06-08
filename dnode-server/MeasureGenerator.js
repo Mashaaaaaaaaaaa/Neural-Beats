@@ -1,4 +1,4 @@
-//jm150231d
+//2015/0231 Marija Jovanovic
 /*
 MeasureGenerator 1.0 - ova klasa ucitava LSTM-generator muzike i generise muziku
 */

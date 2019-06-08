@@ -1,4 +1,4 @@
-//jm150231d
+//2015/0231 Marija Jovanovic
 /*
 MeasureAutoencoder 1.0 - ova klasa ucitava dekoder i koristi ga da prevodi podatke iz generatora u nesto sto lici na MIDI i moze da se igra u brauzeru
 */

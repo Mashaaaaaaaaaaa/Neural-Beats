@@ -1,5 +1,5 @@
 <?php
-
+	//2016/0262 Djordje Arsic 
     class ModelKomentar extends CI_Model{
         public $komentar;
 

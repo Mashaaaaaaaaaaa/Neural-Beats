@@ -1,4 +1,4 @@
-//jm150231d
+//2015/0231 Marija Jovanovic
 /*
 DNode server 0.3 - koristi se kao omotac funkcionalnosti neuralnih mreza za pozive iz php
 */
@@ -32,7 +32,7 @@ const server=dnode({
         if(!Object.keys(generators).includes(session_id)) return;
         generators[session_id].generate().then(function(value){
             decoder.decode(value).then(function(decoded_value){
-                callback(decoded_value);
+                callback(JSON.stringify(decoded_value));
             });
         });
     },
