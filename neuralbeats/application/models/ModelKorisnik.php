@@ -43,7 +43,7 @@
         }*/
         
         public function proveriPassword($lozinka){
-            return $this->korisnik->Password==$lozinka;
+            return password_verify($lozinka, $this->korisnik->Password);
         }
         
         /*public function dohvatiSveKorisnike(){

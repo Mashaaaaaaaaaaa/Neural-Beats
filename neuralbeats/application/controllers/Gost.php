@@ -17,7 +17,7 @@ class Gost extends CI_Controller {
         parent::__construct();
         
         if($this->session->has_userdata('korisnik')){
-            redirect('Korisnik');
+            redirect('Korisnik/view');
         }        
     }
 
@@ -106,7 +106,7 @@ class Gost extends CI_Controller {
                     if($_POST['password1']==$_POST['password2']){
                         $data = array(
                             'Username' => $_POST['username'],
-                            'Password' => $_POST['password1'],
+                            'Password' => password_hash($_POST['password1'],PASSWORD_DEFAULT),
                             'Email' => $_POST['email'],
                         );
                         $this->db->insert('korisnik', $data);

@@ -1,4 +1,5 @@
 <?php
+//Janko Kitanovic
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['korisnik/(:any)'] = 'korisnik/view';
