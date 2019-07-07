@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 07, 2019 at 08:00 PM
+-- Generation Time: Jul 07, 2019 at 11:55 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `komentar` (
 DROP TABLE IF EXISTS `korisnik`;
 CREATE TABLE IF NOT EXISTS `korisnik` (
   `idKorinika` int(11) NOT NULL AUTO_INCREMENT,
-  `Password` varchar(45) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `Username` varchar(45) NOT NULL,
   `Email` varchar(45) NOT NULL,
   `Administrator` bit(1) DEFAULT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   PRIMARY KEY (`idKorinika`),
   UNIQUE KEY `username_UNIQUE` (`Username`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `korisnik`
@@ -76,7 +76,9 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 
 INSERT INTO `korisnik` (`idKorinika`, `Password`, `Username`, `Email`, `Administrator`, `Opis`) VALUES
 (1, 'janko123', 'janko', 'janko@gmail.com', NULL, NULL),
-(4, 'jankic', 'jankic', 'jankic', NULL, NULL);
+(4, 'jankic', 'jankic', 'jankic', NULL, NULL),
+(5, 'janko', 'jankela', 'jankec994@gmail.com', NULL, NULL),
+(11, '$2y$10$SpqlemHLz7h.kFnAxGYWq.2LiHyTYZkODhzsIUu4F5lKoeftWvhqq', 'novi255', 'novi255', NULL, NULL);
 
 -- --------------------------------------------------------
 

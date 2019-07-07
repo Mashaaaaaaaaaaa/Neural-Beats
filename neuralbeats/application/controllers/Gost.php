@@ -121,20 +121,7 @@ class Gost extends CI_Controller {
             else {
                 $this->register('Username u upotrebi');
             }
-        }/*{
-            if ($this->ModelKorisnik->dohvatiKorisnika
-                    ($this->input->post('username'))) {
-                $this->register('Username u upotrebi');
-                    }
-            if ($this->ModelKorisnik->dohvatiEmail
-                    ($this->input->post('email'))) {
-                $this->register('Email u upotrebi');
-                    }
-            
-            $this->session->set_userdata
-                ('korisnik', $this->ModelKorisnik->korisnik);
-                    redirect('Korisnik/view');
-        }*/
+        }
     }        
     
 }
