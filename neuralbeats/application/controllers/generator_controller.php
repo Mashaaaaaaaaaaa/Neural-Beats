@@ -10,6 +10,7 @@
 Kontroler za generator muzike
 Autor - Marija Jovanovic, 2015/0231
  */
+require(__DIR__.'/../../vendor/autoload.php');
 class Generator_Controller extends CI_Controller {
 
     public function __construct() {
@@ -19,6 +20,7 @@ class Generator_Controller extends CI_Controller {
 
 	
 	public function open_session(){
+		print_r("attempting to open session");
 		$dnode=new DNode\DNode();
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->open_session(function($sid) use ($connection){
@@ -29,6 +31,7 @@ class Generator_Controller extends CI_Controller {
 		
 	}
 	public function set_parameter(){
+		print("attempting to set parameter");
 		$id=$this->$input->$post("id");
 		$value=$this->$input->$post("value");
 		$sid=$this->$input->$post("sid");
@@ -38,6 +41,7 @@ class Generator_Controller extends CI_Controller {
 		});
 	}
 	public function generate(){
+		print("attempting to generate");
 		$sid=$this->$input->$post("sid");
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->generate($session_id, function($arr) use ($connection){
@@ -47,6 +51,7 @@ class Generator_Controller extends CI_Controller {
 		});
 	}
 	public function close_session(){
+		print("attempting to close session");
 		$sid=$this->$input->$post("sid");
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->close_session($session_id);
