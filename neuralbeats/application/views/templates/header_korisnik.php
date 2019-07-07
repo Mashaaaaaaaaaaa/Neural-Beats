@@ -15,7 +15,7 @@
                             <table>
                                 <tr>
                                 <form name="search" action="<?php echo base_url(); ?>korisnik/search" method="POST">
-                                    <td><input class="header-tekst" type="text" placeholder="Search" size="50"></td>
+                                    <td><input class="header-tekst" type="text" placeholder="Search" size="30"></td>
                                     <td><input type="submit" value="Search" class="search"></td>
                                 </form>
                                 </tr>
@@ -25,7 +25,7 @@
                         <font color="white">Korisnik: <?php echo $korisnik->Username." "; ?></font>
                     </td>
                     <td>
-                        <a href="<?php echo site_url("Korisnik/logout"); ?>">Logout</a>
+                        <a class="yellow" href="<?php echo site_url("Korisnik/logout"); ?>">Logout</a>
                     </td>
                 </tr>
             </table>
