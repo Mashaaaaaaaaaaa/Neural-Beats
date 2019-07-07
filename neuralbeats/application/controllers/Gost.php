@@ -57,7 +57,7 @@ class Gost extends CI_Controller {
               set_rules('username', 'Username', 'required');
         $this->form_validation->
                 set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() === FALSE) {
             $this->login();
         } else {
             if ($this->ModelKorisnik->dohvatiKorisnika
@@ -77,9 +77,64 @@ class Gost extends CI_Controller {
         }
     }
     
+    public function register($poruka=null){
+        $podaci=[];
+        if($poruka!=null){
+            $podaci['poruka']=$poruka;
+        }
+        $this->view('register',$podaci);      
+    }     
     
     public function registrujse(){
-        
-    }
-
+        $this->load->model('ModelKorisnik');
+      
+        $this->form_validation->
+                set_rules('username', 'Username', 'required');
+        $this->form_validation->
+                set_rules('password1', 'Password', 'required');
+        $this->form_validation->
+                set_rules('password2', 'Password', 'required');
+        $this->form_validation->
+                set_rules('email', 'Email', 'required');        
+        if ($this->form_validation->run() === FALSE) {
+            $this->register();
+        } else {
+            if (!$this->ModelKorisnik->dohvatiKorisnika
+                    ($this->input->post('username'))) {
+                if (!$this->ModelKorisnik->dohvatiEmail
+                        ($this->input->post('email'))) {
+                    if($_POST['password1']==$_POST['password2']){
+                        $data = array(
+                            'Username' => $_POST['username'],
+                            'Password' => $_POST['password1'],
+                            'Email' => $_POST['email'],
+                        );
+                        $this->db->insert('korisnik', $data);
+                        $this->login("Uspesno ste kreirali nalog");
+                    } else {
+                        $this->register('Lozinke se ne poklapaju');
+                    }
+                } else{
+                    $this->register('Email u upotrebi');
+                }
+            }
+            else {
+                $this->register('Username u upotrebi');
+            }
+        }/*{
+            if ($this->ModelKorisnik->dohvatiKorisnika
+                    ($this->input->post('username'))) {
+                $this->register('Username u upotrebi');
+                    }
+            if ($this->ModelKorisnik->dohvatiEmail
+                    ($this->input->post('email'))) {
+                $this->register('Email u upotrebi');
+                    }
+            
+            $this->session->set_userdata
+                ('korisnik', $this->ModelKorisnik->korisnik);
+                    redirect('Korisnik/view');
+        }*/
+    }        
+    
 }

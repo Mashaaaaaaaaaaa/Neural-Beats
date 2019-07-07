@@ -22,6 +22,16 @@
         return true;
         }
         
+        public function dohvatiEmail($email){
+        $result=$this->db->where('Username',$email)
+                    ->get('korisnik');
+        $this->korisnik=$result->row();
+        if($this->korisnik==NULL){
+            return false;
+        }
+        return true;
+        }        
+        
         /*public function daLiJeAdmin($username){
         $result=$this->db->where('username',$username)
                     ->get('autor');
