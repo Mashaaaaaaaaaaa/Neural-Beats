@@ -35,7 +35,6 @@ class Generator_Controller extends CI_Controller {
 		$id=$this->$input->$post("id");
 		$value=$this->$input->$post("value");
 		$sid=$this->$input->$post("sid");
-		$dnode=new DNode\DNode();
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->set_parameter($id, $value, $sid);
 			$connection->end();
@@ -44,7 +43,6 @@ class Generator_Controller extends CI_Controller {
 	public function generate(){
 		print("attempting to generate");
 		$sid=$this->$input->$post("sid");
-		$dnode=new DNode\DNode();
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->generate($session_id, function($arr) use ($connection){
 				echo $arr;
@@ -55,7 +53,6 @@ class Generator_Controller extends CI_Controller {
 	public function close_session(){
 		print("attempting to close session");
 		$sid=$this->$input->$post("sid");
-		$dnode=new DNode\DNode();
 		$dnode->connect(7070, function($remote,$connection) {
 			$remote->close_session($session_id);
 			$connection->end();

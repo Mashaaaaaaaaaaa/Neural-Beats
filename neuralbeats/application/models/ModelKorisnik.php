@@ -1,66 +1,70 @@
 <?php
-    //2016/0262 Djordje Arsic 
+    //2016/0262 Djordje Arsic, Janko Kitanovic
     class ModelKorisnik extends CI_Model{
-        private $korisnik;
+        public $korisnik;
         
         
-        public function __construct($password_hash, $username, $email, $admin, $opis) {
-            $parent::__construct();
-            $korisnik=null;
+        public function __construct() {
+            parent::__construct();
         }
         
-        public function dohvatiKorisnika($idP){
-            $rezultat = $this->db->where('Username',$username)->get('Korisnik');
-            $korisnik = $rezultat->row();
-            if ($korisnik!=NULL) {
-                $this->korisnik=$korisnik;
-                return TRUE;
-            } else {
-                return FALSE;
-            }    
+        public function __toString() {
+            return $this->korisnik;
         }
         
-        public function daLiJeAdmin(){
-            if(this!=null){
-                if ($this->korisnik->Administrator & 1) {
-                    return TRUE;
-                } 
-                else {
-                    return FALSE;
-                }
-            }
+        public function dohvatiKorisnika($username){
+        $result=$this->db->where('Username',$username)
+                    ->get('korisnik');
+        $this->korisnik=$result->row();
+        if($this->korisnik==NULL){
+            return false;
+        }
+        return true;
         }
         
-        public function proveriPassword($password_hash=NULL){
-            if(this!=null){
-                if ($this->korisnik->Pasword_hash== $pasword_hash) {
-                    return TRUE;
-                } 
-                else {
-                    return FALSE;
-                }
-            }
+        public function dohvatiEmail($email){
+        $result=$this->db->where('Username',$email)
+                    ->get('korisnik');
+        $this->korisnik=$result->row();
+        if($this->korisnik==NULL){
+            return false;
+        }
+        return true;
+        }        
+        
+        /*public function daLiJeAdmin($username){
+        $result=$this->db->where('username',$username)
+                    ->get('autor');
+        $this->autor=$result->row();
+        if($this->autor==NULL){
+            return false;
+        }
+        return true;
+        }*/
+        
+        public function proveriPassword($lozinka){
+            return $this->korisnik->Password==$lozinka;
         }
         
-        public function dohvatiSveKorisnike(){
+        /*public function dohvatiSveKorisnike(){
             return $this->db->get('Korisnik')->result();
-        }
+        }*/
         
-        public function sacuvajKorisnika($pasword_hash=NULL, $username=NULL, $email=NULL, $admin=NULL, $opis=NULL){
+        /*public function sacuvajKorisnika($pasword_hash=NULL, $username=NULL, $email=NULL, $admin=NULL, $opis=NULL){
            $this->db->set('Pasword_hash', $pasword_hash);
             $this->db->set('Username', $username);
             $this->db->set('Email', $email);
             $this->db->set('Administrator', $admin);
             $this->db->set('Opis', $opis);
             $this->db->insert("Korisnik");
-        }
+        }*/
         
-        public  function ukloniKorisnika($username){
+        /*public  function ukloniKorisnika($username){
             $this->db->where('Username', $username);
             $this->db->delete("Korisnik");
-        }
+        }*/
         
-        public  function izmenaKorisnika($id,$password_hash=NULL, $admin=NULL, $opis=NULL){
+        /*public  function izmenaKorisnika($id,$password_hash=NULL, $admin=NULL, $opis=NULL){
             $konekcija= BP_PHP::getInstanca();
             if($id!=NULL){
                 if($password_hash!=NULL){
@@ -75,7 +79,7 @@
                 $this->db->where("idKorisnika",$id);
                 $this->db->update("Korisnik");
             }  
-        }
+        }*/
     }   
     
 ?>

@@ -1,3 +1,4 @@
+<!--Janko Kitanovic-->
 <html>
     <head >
         <title>Neural Beats</title>
@@ -14,7 +15,7 @@
                             <table>
                                 <tr>
                                 <form name="search" action="<?php echo base_url(); ?>search" method="POST">
-                                    <td><input class="header-tekst" type="text" placeholder="Search" size="50"></td>
+                                    <td><input class="header-tekst" type="text" placeholder="Search" size="30"></td>
                                     <td><input type="submit" value="Search" class="search"></td>
                                 </form>
                                 </tr>
