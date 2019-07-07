@@ -55,9 +55,9 @@ module.exports = internal.MeasureGenerator = class
     }
 }
 
-/*let generator = new internal.MeasureGenerator("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/LSTM/model.json", "file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/PCADecoder/model.json");
+/*let generator = new internal.MeasureGenerator("https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/LSTM/model.json", "https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/PCADecoder/model.json");
 let Decoder = require('./MeasureAutoencoder');
-let decoder = new Decoder("file://C:\\Users\\Mashallah\\IdeaProjects\\NeuralBeats/decoder/model.json")
+let decoder = new Decoder("https://raw.githubusercontent.com/M-J-Jovanovic/Neural-Beats/master/dnode-server/decoder/model.json")
 generator.generate().then(function (value) {
     decoder.decode(value).then(function (value) {
         console.log(value);
