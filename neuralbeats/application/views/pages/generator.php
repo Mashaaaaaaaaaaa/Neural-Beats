@@ -1,51 +1,52 @@
 <!-- autori: Marija Jovanovic i Janko Kitanovic -->
 <!-- shim -->
-<script src="../inc/shim/Base64.js" type="text/javascript"></script>
-<script src="../inc/shim/Base64binary.js" type="text/javascript"></script>
-<script src="../inc/shim/WebAudioAPI.js" type="text/javascript"></script>
+<script src="./inc/shim/Base64.js" type="text/javascript"></script>
+<script src="./inc/shim/Base64binary.js" type="text/javascript"></script>
+<script src="./inc/shim/WebAudioAPI.js" type="text/javascript"></script>
 <!-- midi.js package -->
-<script src="../js/midi/audioDetect.js" type="text/javascript"></script>
-<script src="../js/midi/gm.js" type="text/javascript"></script>
-<script src="../js/midi/loader.js" type="text/javascript"></script>
-<script src="../js/midi/plugin.audiotag.js" type="text/javascript"></script>
-<script src="../js/midi/plugin.webaudio.js" type="text/javascript"></script>
-<script src="../js/midi/plugin.webmidi.js" type="text/javascript"></script>
-<script src="../js/midi/player.js" type="text/javascript"></script>
+<script src="./js/midi/audioDetect.js" type="text/javascript"></script>
+<script src="./js/midi/gm.js" type="text/javascript"></script>
+<script src="./js/midi/loader.js" type="text/javascript"></script>
+<script src="./js/midi/plugin.audiotag.js" type="text/javascript"></script>
+<script src="./js/midi/plugin.webaudio.js" type="text/javascript"></script>
+<script src="./js/midi/plugin.webmidi.js" type="text/javascript"></script>
+<script src="./js/util/dom_request_xhr.js" type="text/javascript"></script>
+<script src="./js/util/dom_request_script.js" type="text/javascript"></script>
+<script src="./js/midi/player.js" type="text/javascript"></script>
+<!-- jquery -->
+<script src="./js/util/jquery-3.4.1.js" type="text/javascript"></script>
+
 <script>
-var session_id;
 var speed=5;
 var volume=0.5;
-var xhttp=new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
-		session_id = parseInt(this.responseText);
-	}
-};
-xhttp.open("POST", "generator_controller.php/open_session", true);
-xhttp.send();
+MIDI.loadPlugin({
+	soundfontUrl: "./soundfont/",
+	instrument: "acoustic_grand_piano",
+	onprogress: function(state, progress) {
+		console.log(state, progress);
+	},
+	onsuccess: function(){}
+});
+$(document).ready(function(){$.ajax({
+	url: "index.php/generator_controller/open_session"
+})});
+
 function neural_update(slider_id){
-	var xhttp=new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {};
-	xhttp.open("POST", "generator_controller.php/set_parameter", true);
-	var id=parseInt(new RegExp(/\d+/).exec(slider_id)[0])-1;
-	var value=parseFloat(document.getElementById(slider_id).value);
-	xhttp.send("id="+id+"&value="+value+"&sid="+session_id);
-}
-window.onbeforeunload=function(){
-	var xhttp=new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {};
-	xhttp.open("POST", "generator_controller.php/close_session", true);
-	xhttp.send("sid="+session_id);
+	$.ajax({
+		data: {id: parseInt(new RegExp(/\d+/).exec(slider_id)[0])-1, value: parseFloat(document.getElementById(slider_id).value)/100},
+		url: "index.php/generator_controller/set_parameter",
+		method: 'POST'
+	});
 }
 function generate(){
-	var xhttp=new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			play_music(JSON.parse(this.responseText));
+	MIDI.WebAudio.getContext().resume();
+	$.ajax({
+		url: "index.php/generator_controller/generate",
+		success: function(msg) {
+			console.log(JSON.parse(msg));
+			play_music(JSON.parse(msg));
 		}
-	};
-	xhttp.open("POST", "generator_controller.php/generate", true);
-	xhttp.send("sid="+session_id);
+	});
 }
 function change_volume(value){
 	volume=parseFloat(value)/100;
@@ -56,9 +57,9 @@ function change_speed(value){
 function play_music(measure){
 	for(var i=0;i<measure.length;i++){
 		var delay=measure[i][0]/speed;
-		if (i>0) delay-=measureExample[i-1][0]/speed;
-		MIDI.noteOn(measureExample[i][1]%16, measureExample[i][3],parseInt(measureExample[i][4]*volume),delay);
-		MIDI.noteOff(measureExample[i][1]%16, measureExample[i][3], measureExample[i][2]/speed+delay);
+		if (i>0) delay-=measure[i-1][0]/speed;
+		MIDI.noteOn(measure[i][1]%2, measure[i][3],parseInt(measure[i][4]*volume),delay);
+		MIDI.noteOff(measure[i][1]%2, measure[i][3], measure[i][2]/speed+delay);
 	}
 }
 </script>
