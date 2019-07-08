@@ -20,6 +20,8 @@ module.exports = internal.MeasureGenerator = class {
 	konstruktor, cuva puteve na mozgove
 	*/
     constructor(LSTM_path, PCA_decoder_path) {
+		_parameters = Array(40).fill(0.5);
+		_used_parameters=Array(40).fill(0.5);
         _LSTM_path = LSTM_path;
         _PCA_decoder_path = PCA_decoder_path;
     }
@@ -63,10 +65,11 @@ module.exports = internal.MeasureGenerator = class {
 		};
 	}
 	static fromJSON(obj){
+		let newGen = new this(obj.LSTM_path, obj.PCA_decoder_path);
 		_parameters=obj.parameters;
 		_used_parameters=obj.parameters;
 		_LSTM_data=obj.LSTM_data;
-		return this(obj.LSTM_path, obj.PCA_decoder_path);
+		return newGen;
 	}
 }
 
