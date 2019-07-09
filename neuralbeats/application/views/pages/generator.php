@@ -43,6 +43,7 @@ function generate(){
 	$.ajax({
 		url: "index.php/generator_controller/generate",
 		success: function(msg) {
+			console.log(msg);
 			console.log(JSON.parse(msg));
 			play_music(JSON.parse(msg));
 		}
@@ -60,6 +61,17 @@ function play_music(measure){
 		if (i>0) delay-=measure[i-1][0]/speed;
 		MIDI.noteOn(measure[i][1]%2, measure[i][3],parseInt(measure[i][4]*volume),delay);
 		MIDI.noteOff(measure[i][1]%2, measure[i][3], measure[i][2]/speed+delay);
+	}
+}
+function randomize(){
+	for(var i=0;i<40;i++){
+		var number=Math.floor(Math.random() * 101);
+		document.getElementById("Neural_"+(i+1)).value=number;
+		$.ajax({
+			data: {id: i, value: number/100},
+			url: "index.php/generator_controller/set_parameter",
+			method: 'POST'
+		});
 	}
 }
 </script>
@@ -212,7 +224,7 @@ function play_music(measure){
         </table>
 
     </div>
-    <div><button type="button">Randomize</button></form></div>
+    <div><button onclick="randomize();" type="button">Randomize</button></form></div>
     <div>Jacina:</div><div> <input type="range" min="0" max="100" value="50" onchange="change_volume(this.value)" class="slider" id="Volume"></div>
     <div>Brzina:</div><div> <input type="range" min="1" max="100" value="50" onchange="change_speed(this.value)" class="slider" id="Speed"></div>
     <!--<div><button onclick="if (document.getElementById('Record')) {

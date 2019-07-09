@@ -20,7 +20,7 @@ class Generator_Controller extends CI_Controller {
 	
 	public function open_session(){
 		$model=`node ../dnode-server/node-wrapper.js open`;
-		$_SESSION['model']=$model;
+		$_SESSION['model']=json_decode($model);
 		echo $model;
 	}
 	public function set_parameter(){
@@ -31,9 +31,7 @@ class Generator_Controller extends CI_Controller {
 		$value=null;
 		if (isset($_POST["value"])) $value=$_POST["value"]; else $value=0.5;
 		if(isset($_SESSION['model'])){
-			$model=json_decode($_SESSION['model']);
-			$model->parameters[$id]=$value;
-			$_SESSION['model']=json_encode($model);
+			$_SESSION['model']->parameters[$id]=floatval($value);
 			//$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			//$filename='model-'.substr(str_shuffle($permitted_chars), 0, 16).'.json';
 			//file_put_contents('../dnode_server/'.$filename,$_SESSION['model']);
@@ -46,12 +44,12 @@ class Generator_Controller extends CI_Controller {
 		if(isset($_SESSION['model'])){
 			$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$filename='model-'.substr(str_shuffle($permitted_chars), 0, 16).'.json';
-			file_put_contents('../dnode-server/'.$filename,$_SESSION['model']);
+			file_put_contents('../dnode-server/'.$filename,json_encode($_SESSION['model']));
 			$output=explode("\n",shell_exec("node ../dnode-server/node-wrapper.js generate ".$filename));
 			unlink('../dnode-server/'.$filename) or die("Couldn't delete file");
 			$model=$output[0];
-			$_SESSION['model']=$model;
-			$result=$output[1];
+			$_SESSION['model']=json_decode($model);
+			if(isset($output[1]))$result=$output[1]; else $result=$output[0];
 			echo $result;
 		}
 	}
